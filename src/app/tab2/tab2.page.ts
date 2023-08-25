@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EpisodesService } from '../services/episodes.service';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  Episodes: any = [];
 
-  constructor() {}
+  constructor(
+    private epiService: EpisodesService
+  ) {}
 
+  ngOnInit():void{
+    this.getEpisodes();
+  }
+
+  getEpisodes(){
+    this.epiService.getEpisodes().subscribe( epi => {
+      console.log(epi)
+      this.Episodes = epi;
+    })
+  }
 }
